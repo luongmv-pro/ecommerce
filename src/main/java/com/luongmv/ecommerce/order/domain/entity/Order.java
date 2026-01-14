@@ -5,7 +5,13 @@ import com.luongmv.ecommerce.order.domain.OrderStatus;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "orders")
+@Table(
+        name = "orders",
+        indexes = {
+                @Index(name = "idx_orders_user_id", columnList = "user_id"),
+                @Index(name = "idx_orders_created_at", columnList = "created_at")
+        }
+)
 public class Order extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
