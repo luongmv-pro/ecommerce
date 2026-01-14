@@ -4,7 +4,15 @@ import com.luongmv.ecommerce.common.entity.BaseEntity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(
+        name = "users",
+        indexes = {
+                @Index(name = "index_users_email", columnList = "email")
+        },
+        uniqueConstraints = {
+                @UniqueConstraint(name = "uk_users_email", columnNames = "email")
+        }
+)
 public class User extends BaseEntity {
 
     @Column(nullable = false, unique = true)
