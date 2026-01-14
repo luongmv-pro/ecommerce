@@ -17,6 +17,12 @@ public abstract class BaseEntity {
     @Column(name = "updated_at")
     private Instant updatedAt;
 
+    /*
+    @PrePersist ->hook
+    @CreationTimestamp -> automation
+        @CreationTimestamp
+        private Instant createdAt;
+     */
     @PrePersist
     protected void onCreate() {
         this.createdAt = Instant.now();
