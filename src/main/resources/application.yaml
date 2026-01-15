@@ -24,6 +24,10 @@ spring:
   jackson:
     time-zone: UTC
 
+jwt:
+    secret: luongmv-super-secret-key-1234567890
+    expiration: 3600000
+
 logging:
   level:
     org.hibernate.SQL: debug
