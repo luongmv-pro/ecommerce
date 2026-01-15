@@ -4,6 +4,7 @@ import com.luongmv.ecommerce.user.dto.UserRegisterRequest;
 import com.luongmv.ecommerce.user.dto.UserResponse;
 import com.luongmv.ecommerce.user.entity.User;
 import com.luongmv.ecommerce.user.repository.UserRepository;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
