@@ -2,6 +2,7 @@ package com.luongmv.ecommerce.product.service;
 
 import com.luongmv.ecommerce.product.dto.ProductCreateRequest;
 import com.luongmv.ecommerce.product.dto.ProductDetailResponse;
+import com.luongmv.ecommerce.product.dto.ProductFilterRequest;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.entity.Product;
 import com.luongmv.ecommerce.product.repository.ProductRepository;
@@ -62,5 +63,22 @@ public class ProductService {
                 product.getStock(),
                 product.getDescription()
         );
+    }
+
+    public Page<ProductResponse> search(
+            ProductFilterRequest filter,
+            Pageable pageable
+    ) {
+        return productRepository.search(
+                filter.getKeyword(),
+                filter.getMinPrice(),
+                filter.getMaxPrice(),
+                pageable
+        ).map(p -> new ProductResponse(
+                p.getId(),
+                p.getName(),
+                p.getPrice(),
+                p.getStock()
+        ));
     }
 }

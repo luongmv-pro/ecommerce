@@ -2,6 +2,7 @@ package com.luongmv.ecommerce.product.controller;
 
 import com.luongmv.ecommerce.product.dto.ProductCreateRequest;
 import com.luongmv.ecommerce.product.dto.ProductDetailResponse;
+import com.luongmv.ecommerce.product.dto.ProductFilterRequest;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.service.ProductService;
 import jakarta.validation.Valid;
@@ -24,12 +25,12 @@ public class ProductController {
     }
 
     // PUBLIC
-    @GetMapping
-    public Page<ProductResponse> list(
-            @PageableDefault(size=2, sort = "id") Pageable pageable
-            ) {
-        return productService.findAll(pageable);
-    }
+//    @GetMapping
+//    public Page<ProductResponse> list(
+//            @PageableDefault(size=2, sort = "id") Pageable pageable
+//            ) {
+//        return productService.findAll(pageable);
+//    }
 
     @GetMapping("/{id}")
     public ProductDetailResponse detail(@PathVariable Long id) {
@@ -45,4 +46,12 @@ public class ProductController {
         return productService.create(request);
     }
 
+    @GetMapping
+    public Page<ProductResponse> list(
+             ProductFilterRequest filter,
+            @PageableDefault(size = 2, sort = "id") Pageable pageable
+    ) {
+
+        return productService.search(filter, pageable);
+    }
 }
