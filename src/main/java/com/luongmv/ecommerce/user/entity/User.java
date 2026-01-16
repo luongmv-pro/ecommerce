@@ -1,6 +1,7 @@
 package com.luongmv.ecommerce.user.entity;
 
 import com.luongmv.ecommerce.common.entity.BaseEntity;
+import com.luongmv.ecommerce.user.domain.UserRole;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,11 +22,16 @@ public class User extends BaseEntity {
     @Column(nullable = false)
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    @Column(length = 20)
+    private UserRole role;
+
     protected User() {}
 
-    public User(String email, String password) {
+    public User(String email, String password, UserRole role) {
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public String getEmail() {
@@ -34,5 +40,9 @@ public class User extends BaseEntity {
 
     public String getPassword() {
         return password;
+    }
+
+    public UserRole getRole() {
+        return role;
     }
 }

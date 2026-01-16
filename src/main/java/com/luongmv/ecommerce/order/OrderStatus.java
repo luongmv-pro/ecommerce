@@ -1,4 +1,4 @@
-package com.luongmv.ecommerce.order.domain;
+package com.luongmv.ecommerce.order;
 
 public enum OrderStatus {
     NEW,

@@ -1,5 +1,6 @@
 package com.luongmv.ecommerce.user.service;
 
+import com.luongmv.ecommerce.user.domain.UserRole;
 import com.luongmv.ecommerce.user.dto.UserRegisterRequest;
 import com.luongmv.ecommerce.user.dto.UserResponse;
 import com.luongmv.ecommerce.user.entity.User;
@@ -31,7 +32,7 @@ public class UserService {
         String encodedPassword = passwordEncoder.encode(request.getPassword());
 
         // 3. Create entity
-        User user = new User(request.getEmail(), encodedPassword);
+        User user = new User(request.getEmail(), encodedPassword, UserRole.USER);
 
         // 4. Save
         User savedUser = userRepository.save(user);

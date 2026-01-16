@@ -1,7 +1,7 @@
-package com.luongmv.ecommerce.order.domain.entity;
+package com.luongmv.ecommerce.order.entity;
 
 import com.luongmv.ecommerce.common.entity.BaseEntity;
-import com.luongmv.ecommerce.order.domain.OrderStatus;
+import com.luongmv.ecommerce.order.OrderStatus;
 import jakarta.persistence.*;
 
 @Entity

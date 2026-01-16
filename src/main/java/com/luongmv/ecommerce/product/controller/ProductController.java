@@ -4,6 +4,7 @@ import com.luongmv.ecommerce.product.dto.ProductCreateRequest;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class ProductController {
     }
 
     // ADMIN
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ProductResponse create(
             @Valid @RequestBody ProductCreateRequest request
