@@ -1,6 +1,7 @@
 package com.luongmv.ecommerce.product.service;
 
 import com.luongmv.ecommerce.product.dto.ProductCreateRequest;
+import com.luongmv.ecommerce.product.dto.ProductDetailResponse;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.entity.Product;
 import com.luongmv.ecommerce.product.repository.ProductRepository;
@@ -46,5 +47,19 @@ public class ProductService {
                         p.getStock()
                 ))
                 .toList();
+    }
+
+    public ProductDetailResponse findById(Long id) {
+
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        return new ProductDetailResponse(
+                product.getId(),
+                product.getName(),
+                product.getPrice(),
+                product.getStock(),
+                product.getDescription()
+        );
     }
 }

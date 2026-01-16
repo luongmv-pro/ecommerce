@@ -1,6 +1,7 @@
 package com.luongmv.ecommerce.product.controller;
 
 import com.luongmv.ecommerce.product.dto.ProductCreateRequest;
+import com.luongmv.ecommerce.product.dto.ProductDetailResponse;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.service.ProductService;
 import jakarta.validation.Valid;
@@ -25,6 +26,11 @@ public class ProductController {
         return productService.findAll();
     }
 
+    @GetMapping("/{id}")
+    public ProductDetailResponse detail(@PathVariable Long id) {
+        return productService.findById(id);
+    }
+
     // ADMIN
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
@@ -33,4 +39,5 @@ public class ProductController {
     ) {
         return productService.create(request);
     }
+
 }
