@@ -5,6 +5,8 @@ import com.luongmv.ecommerce.product.dto.ProductDetailResponse;
 import com.luongmv.ecommerce.product.dto.ProductResponse;
 import com.luongmv.ecommerce.product.entity.Product;
 import com.luongmv.ecommerce.product.repository.ProductRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,16 +39,15 @@ public class ProductService {
         );
     }
 
-    public List<ProductResponse> findAll() {
-        return productRepository.findAll()
-                .stream()
+    public Page<ProductResponse> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
                 .map(p -> new ProductResponse(
                         p.getId(),
                         p.getName(),
                         p.getPrice(),
                         p.getStock()
-                ))
-                .toList();
+                ));
+
     }
 
     public ProductDetailResponse findById(Long id) {
