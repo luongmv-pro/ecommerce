@@ -4,14 +4,11 @@ import com.luongmv.ecommerce.common.entity.BaseEntity;
 import com.luongmv.ecommerce.order.OrderStatus;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-@Table(
-        name = "orders",
-        indexes = {
-                @Index(name = "idx_orders_user_id", columnList = "user_id"),
-                @Index(name = "idx_orders_created_at", columnList = "created_at")
-        }
-)
+@Table( name = "orders")
 public class Order extends BaseEntity {
 
     @Column(name = "user_id", nullable = false)
@@ -21,10 +18,35 @@ public class Order extends BaseEntity {
     @Column(nullable = false, length = 20)
     private OrderStatus status;
 
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<OrderItem> items = new ArrayList<>();
+
     protected Order() {}
 
     public Order(Long userId) {
         this.userId = userId;
         this.status = OrderStatus.NEW;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public OrderStatus getStatus(){
+        return status;
+    }
+
+    public List<OrderItem> getItems() {
+        return items;
+    }
+
+    /* domain logic */
+
+    public void addItem(Long productId, int quantity, long price) {
+        items.add(new OrderItem(this, productId, quantity, price));
     }
 }
