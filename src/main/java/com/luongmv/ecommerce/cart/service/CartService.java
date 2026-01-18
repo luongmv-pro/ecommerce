@@ -1,5 +1,7 @@
 package com.luongmv.ecommerce.cart.service;
 
+import com.luongmv.ecommerce.cart.dto.CartItemResponse;
+import com.luongmv.ecommerce.cart.dto.CartResponse;
 import com.luongmv.ecommerce.cart.entity.Cart;
 import com.luongmv.ecommerce.cart.repository.CartRepository;
 import com.luongmv.ecommerce.product.repository.ProductRepository;
@@ -42,8 +44,25 @@ public class CartService {
         cart.updateItem(productId, quantity);
     }
 
+    @Transactional
     public void removeItem(Long userId, Long productId) {
         Cart cart = getOrCreate(userId);
         cart.removeItem(productId);
+    }
+
+    @Transactional
+    public CartResponse viewCart(Long userId) {
+
+        Cart cart = getOrCreate(userId);
+
+        return new CartResponse(
+                cart.getUserId(),
+                cart.getItems().stream()
+                        .map(i -> new CartItemResponse(
+                                i.getProductId(),
+                                i.getQuantity()
+                        ))
+                        .toList()
+        );
     }
 }

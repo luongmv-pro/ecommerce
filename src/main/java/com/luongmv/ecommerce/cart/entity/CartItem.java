@@ -28,6 +28,8 @@ public class CartItem {
     @Column(nullable = false)
     private int quantity;
 
+    protected CartItem(){}
+
     public CartItem(Cart cart, Long productId, int quantity) {
         this.cart = cart;
         this.productId = productId;
